@@ -1,9 +1,11 @@
 import { ICommentDocument } from '@/models/comment.model'
 import React from 'react'
 import ProfilePhoto from './shared/ProfilePhoto'
-import ReactTimeago from 'react-timeago'
-
+import {formatDistanceToNowStrict} from "date-fns"
 const Comment = ({ comment }: { comment: ICommentDocument }) => {
+    const timeago = formatDistanceToNowStrict(new Date(comment.createdAt), {
+        addSuffix: true,
+      });
     return (
         <div className='flex gap-2 my-4'>
             <div className='mt-2'>
@@ -17,7 +19,7 @@ const Comment = ({ comment }: { comment: ICommentDocument }) => {
                 </div>
                 <div>
                     <p className='text-xs text-gray-500'>
-                        <ReactTimeago date={new Date(comment.createdAt)} />
+                        {timeago}
                     </p>
                 </div>
             </div>
